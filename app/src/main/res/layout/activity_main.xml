@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#BBD7E4"
+    tools:context=".MainActivity">
+
+
+    <TextView
+        android:id="@+id/Nombre"
+
+        android:layout_width="88dp"
+        android:layout_height="53dp"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="192dp"
+        android:background="#F8A68C"
+        android:gravity="center"
+        android:text="Nombre"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/editTextNombre"
+        android:layout_width="164dp"
+        android:layout_height="62dp"
+        android:layout_marginStart="20dp"
+        android:background="#F8A68C"
+        android:ems="10"
+        android:hint="Enter your name"
+        app:layout_constraintStart_toEndOf="@+id/Nombre"
+        app:layout_constraintTop_toTopOf="@+id/Nombre" />
+
+    <TextView
+        android:id="@+id/Contraseña"
+        android:layout_width="95dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="52dp"
+        android:background="#F8A68C"
+        android:gravity="center"
+        android:text="Contraseña"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Nombre" />
+
+    <EditText
+        android:id="@+id/editTextContraseña"
+        android:layout_width="159dp"
+        android:layout_height="58dp"
+        android:layout_marginStart="16dp"
+        android:background="#F8A68C"
+        android:ems="10"
+        android:hint="Enter your pass"
+        app:layout_constraintStart_toEndOf="@+id/Contraseña"
+        app:layout_constraintTop_toTopOf="@+id/Contraseña" />
+
+    <Button
+        android:id="@+id/registerbtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="168dp"
+        android:layout_marginBottom="8dp"
+        android:onClick="registerbtnClick"
+        android:text="REGISTER"
+        app:layout_constraintBottom_toTopOf="@+id/loginbtnClick"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/loginbtnClick"
+        android:layout_width="116dp"
+        android:layout_height="52dp"
+        android:layout_marginEnd="168dp"
+        android:layout_marginBottom="220dp"
+        android:onClick="loginbtnClick"
+        android:text="LOG IN"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/Titulo"
+        android:layout_width="256dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="44dp"
+        android:fontFamily="sans-serif-light"
+        android:gravity="center|fill"
+        android:shadowColor="#000000"
+        android:shadowDx="5"
+        android:shadowDy="5"
+        android:shadowRadius="2"
+        android:text="KEBAB SIMULATOR "
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textColor="#B52E2E"
+        android:textColorHighlight="#5E1414"
+        android:textSize="27sp"
+        android:textStyle="bold|italic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.589"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
