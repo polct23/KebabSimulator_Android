@@ -1,4 +1,4 @@
-package com.example.myapplication1;
+package edu.upc.dsa.kebabsimulator_android;
 
 import org.junit.Test;
 

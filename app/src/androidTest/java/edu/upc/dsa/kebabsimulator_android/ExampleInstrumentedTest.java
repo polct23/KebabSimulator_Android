@@ -1,4 +1,4 @@
-package com.example.myapplication1;
+package edu.upc.dsa.kebabsimulator_android;
 
 import android.content.Context;
 
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
     public void useAppContext() {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
-        assertEquals("com.example.myapplication1", appContext.getPackageName());
+        assertEquals("edu.upc.dsa.kebabsimulator_android", appContext.getPackageName());
     }
 }
