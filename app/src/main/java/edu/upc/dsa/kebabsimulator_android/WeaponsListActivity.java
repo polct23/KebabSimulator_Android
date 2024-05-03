@@ -83,7 +83,6 @@ public class WeaponsListActivity extends AppCompatActivity  {
             public void onResponse(Call<List<Weapon>> call, Response<List<Weapon>> response) {
                 int code = response.code();
                 List<Weapon> weaponList = response.body();
-                Toast.makeText(WeaponsListActivity.this, "Code: " + weaponList.get(0).getNombre(), Toast.LENGTH_LONG).show();
                 if (response.isSuccessful() && response.body() != null) {
                     adapter.setData(response.body());
                     adapter.notifyDataSetChanged();

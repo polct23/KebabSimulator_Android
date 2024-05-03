@@ -63,9 +63,14 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 try {
-                    Toast.makeText(MainActivity.this, "REGISTER", Toast.LENGTH_SHORT).show();
-                    addUser(usernameField.getText().toString(), passwordField.getText().toString());
-
+                    if(usernameField.getText().toString().isEmpty() && passwordField.getText().toString().isEmpty()){
+                        Toast.makeText(MainActivity.this, "Register Failed", Toast.LENGTH_SHORT).show();
+                    }
+                    else
+                    {
+                        Toast.makeText(MainActivity.this, "Registered Successfully", Toast.LENGTH_SHORT).show();
+                        addUser(usernameField.getText().toString(), passwordField.getText().toString());
+                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
