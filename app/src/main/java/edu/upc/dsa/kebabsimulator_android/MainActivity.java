@@ -9,6 +9,7 @@ import android.widget.EditText;
 import androidx.appcompat.app.AppCompatActivity;
 
 import edu.upc.dsa.kebabsimulator_android.models.API;
+import edu.upc.dsa.kebabsimulator_android.models.SharedPrefManager;
 import edu.upc.dsa.kebabsimulator_android.models.User;
 import edu.upc.dsa.kebabsimulator_android.models.Weapon;
 
@@ -22,15 +23,23 @@ import android.widget.Toast;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import retrofit2.Call;
+
+import android.content.Context;
+import android.content.SharedPreferences;
 
 public class MainActivity extends AppCompatActivity {
     private EditText usernameField;
     private EditText passwordField;
     private Button loginButton;
 
+     //SharedPreferences sharedPreferences;
+
     private Button registerButton;
     private Button listaButton;
     List<User> listaUsers = new ArrayList<User>();
+
+    SharedPrefManager sharedPrefManager;
 
 
 
@@ -45,12 +54,15 @@ public class MainActivity extends AppCompatActivity {
         registerButton = findViewById(R.id.registerButton);
         listaButton = findViewById(R.id.listaButton);
 
+        sharedPrefManager = SharedPrefManager.getInstance(this);
+
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 try {
 
                     loginUser();
+                    User loggedInUser = sharedPrefManager.getUser();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -70,6 +82,8 @@ public class MainActivity extends AppCompatActivity {
                     {
                         Toast.makeText(MainActivity.this, "Registered Successfully", Toast.LENGTH_SHORT).show();
                         addUser(usernameField.getText().toString(), passwordField.getText().toString());
+                        //SharedPrefManager.getInstance(MainActivity.this).saveUser(new User(usernameField.getText().toString(), passwordField.getText().toString()));
+                        sharedPrefManager.saveUser(new User(usernameField.getText().toString(), passwordField.getText().toString()));
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -84,6 +98,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        if (sharedPrefManager.isLoggedIn()) {
+            //Redirige al usuario a la actividad que desees
+            Intent intent = new Intent(MainActivity.this, WeaponsListActivity.class);
+            startActivity(intent);
+            finish();
+        }
     }
 
     private void loginUser() throws Exception {
@@ -165,5 +185,6 @@ public class MainActivity extends AppCompatActivity {
         }
         return false;
     }
+
 
 }

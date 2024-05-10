@@ -32,4 +32,10 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
+    public String getIdUser() {
+        return idUser;
+    }
+    public void setIDUser(String idUser) {
+        this.idUser = idUser;
+    }
 }
