@@ -2,6 +2,7 @@ package edu.upc.dsa.kebabsimulator_android.models;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 
 public class SharedPrefManager {
 
@@ -18,6 +19,7 @@ public class SharedPrefManager {
         if (instance == null) {
             instance = new SharedPrefManager(context);
         }
+        Log.d("SharedPrefManager", "Context: " + context.toString());
         return instance;
     }
 
@@ -46,7 +48,7 @@ public class SharedPrefManager {
         );
     }
 
-    public void clear() {
+    public void logout() {
         SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.clear();

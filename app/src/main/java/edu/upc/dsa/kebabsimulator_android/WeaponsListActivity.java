@@ -3,8 +3,11 @@ package edu.upc.dsa.kebabsimulator_android;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -22,6 +25,7 @@ import java.io.IOException;
 import java.util.List;
 
 import edu.upc.dsa.kebabsimulator_android.models.API;
+import edu.upc.dsa.kebabsimulator_android.models.SharedPrefManager;
 import edu.upc.dsa.kebabsimulator_android.models.Weapon;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -71,6 +75,18 @@ public class WeaponsListActivity extends AppCompatActivity  {
             Log.w(TAG,"excp", e);
             throw new RuntimeException(e);
         }
+
+        Button logoutButton = findViewById(R.id.logoutButton);
+        logoutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPrefManager sharedPrefManager = SharedPrefManager.getInstance(getApplicationContext());
+                sharedPrefManager.logout();
+                Intent intent = new Intent(WeaponsListActivity.this, MainActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
 
     }
 

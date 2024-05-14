@@ -54,7 +54,13 @@ public class MainActivity extends AppCompatActivity {
         registerButton = findViewById(R.id.registerButton);
         listaButton = findViewById(R.id.listaButton);
 
-        sharedPrefManager = SharedPrefManager.getInstance(this);
+        sharedPrefManager = SharedPrefManager.getInstance(getApplicationContext());
+        if (sharedPrefManager.isLoggedIn()) {
+            //Redirige al usuario a la actividad que desees
+            Intent intent = new Intent(MainActivity.this, WeaponsListActivity.class);
+            startActivity(intent);
+            finish();
+        }
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
                 try {
 
                     loginUser();
+                    sharedPrefManager.saveUser(new User(usernameField.getText().toString(), passwordField.getText().toString()));
                     User loggedInUser = sharedPrefManager.getUser();
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -83,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(MainActivity.this, "Registered Successfully", Toast.LENGTH_SHORT).show();
                         addUser(usernameField.getText().toString(), passwordField.getText().toString());
                         //SharedPrefManager.getInstance(MainActivity.this).saveUser(new User(usernameField.getText().toString(), passwordField.getText().toString()));
-                        sharedPrefManager.saveUser(new User(usernameField.getText().toString(), passwordField.getText().toString()));
+
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -98,12 +105,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        if (sharedPrefManager.isLoggedIn()) {
-            //Redirige al usuario a la actividad que desees
-            Intent intent = new Intent(MainActivity.this, WeaponsListActivity.class);
-            startActivity(intent);
-            finish();
-        }
+
     }
 
     private void loginUser() throws Exception {
