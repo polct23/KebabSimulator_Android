@@ -1,7 +1,13 @@
 package edu.upc.dsa.kebabsimulator_android;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.TextPaint;
+import android.text.method.LinkMovementMethod;
+import android.text.style.ClickableSpan;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -18,6 +24,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.IOException;
@@ -35,8 +42,7 @@ public class MainActivity extends AppCompatActivity {
 
      //SharedPreferences sharedPreferences;
 
-    private Button registerButton;
-    private Button listaButton;
+
     List<User> listaUsers = new ArrayList<User>();
 
     SharedPrefManager sharedPrefManager;
@@ -48,11 +54,34 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        TextView noAccountTextView = findViewById(R.id.noAccountTextView);
+        String text = "No tienes una cuenta? Regístrate ahora!";
+        SpannableString spannableString = new SpannableString(text);
+
+        ClickableSpan clickableSpan = new ClickableSpan() {
+            @Override
+            public void onClick(View textView) {
+                Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
+                startActivity(intent);
+            }
+            @Override
+            public void updateDrawState(TextPaint ds) {
+                super.updateDrawState(ds);
+                ds.setUnderlineText(false);
+            }
+        };
+
+        spannableString.setSpan(clickableSpan, text.indexOf("Regístrate ahora!"), text.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        noAccountTextView.setText(spannableString);
+        noAccountTextView.setMovementMethod(LinkMovementMethod.getInstance());
+        noAccountTextView.setHighlightColor(Color.TRANSPARENT);
+
         usernameField = findViewById(R.id.username);
         passwordField = findViewById(R.id.password);
         loginButton = findViewById(R.id.loginButton);
-        registerButton = findViewById(R.id.registerButton);
-        listaButton = findViewById(R.id.listaButton);
+
+
 
         sharedPrefManager = SharedPrefManager.getInstance(getApplicationContext());
         if (sharedPrefManager.isLoggedIn()) {
@@ -77,33 +106,8 @@ public class MainActivity extends AppCompatActivity {
                 //startActivity(intent);
             }
         });
-        registerButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-                try {
-                    if(usernameField.getText().toString().isEmpty() && passwordField.getText().toString().isEmpty()){
-                        Toast.makeText(MainActivity.this, "Register Failed", Toast.LENGTH_SHORT).show();
-                    }
-                    else
-                    {
-                        Toast.makeText(MainActivity.this, "Registered Successfully", Toast.LENGTH_SHORT).show();
-                        addUser(usernameField.getText().toString(), passwordField.getText().toString());
-                        //SharedPrefManager.getInstance(MainActivity.this).saveUser(new User(usernameField.getText().toString(), passwordField.getText().toString()));
 
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-        listaButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, WeaponsListActivity.class);
-                startActivity(intent);
-            }
-        });
 
 
     }
@@ -157,27 +161,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-    private void addUser(String username, String password) {
-        User newUser = new User(username, password);
-        API apiService = API.retrofit.create(API.class);
-        retrofit2.Call<User> call = apiService.addUser(newUser);
 
-        call.enqueue(new retrofit2.Callback<User>() {
-            @Override
-            public void onResponse(retrofit2.Call<User> call, retrofit2.Response<User> response) {
-                if (response.isSuccessful()) {
-                    Log.d("Success", "User added successfully");
-                } else {
-                    Log.w("FAIL", "Failed to add user, HTTP " + response.code());
-                }
-            }
-
-            @Override
-            public void onFailure(retrofit2.Call<User> call, Throwable t) {
-                Log.e("FAIL(onFailure)", "Error in Retrofit: " + t.toString());
-            }
-        });
-    }
 
     private boolean checkUser(String username, String password) {
         for (User user : listaUsers) {
