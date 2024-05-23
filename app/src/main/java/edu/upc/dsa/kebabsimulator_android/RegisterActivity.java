@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -33,6 +34,8 @@ public class RegisterActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ProgressBar progressBar = findViewById(R.id.progressBar3);
+        progressBar.setVisibility(View.INVISIBLE);
         setContentView(R.layout.activity_register);
 
         nameEditText = findViewById(R.id.name);
@@ -44,6 +47,7 @@ public class RegisterActivity extends AppCompatActivity {
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                progressBar.setVisibility(View.VISIBLE);
                 //String name = nameEditText.getText().toString();
                 //String email = emailEditText.getText().toString();
                 String password = passwordEditText.getText().toString();
@@ -67,6 +71,7 @@ public class RegisterActivity extends AppCompatActivity {
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
+                    progressBar.setVisibility(View.INVISIBLE);
                 } else {
                     // Las contraseñas no coinciden
                     Toast.makeText(RegisterActivity.this, "Las contraseñas no coinciden!", Toast.LENGTH_SHORT).show();

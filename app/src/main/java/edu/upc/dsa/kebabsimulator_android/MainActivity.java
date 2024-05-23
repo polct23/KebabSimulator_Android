@@ -3,6 +3,7 @@ package edu.upc.dsa.kebabsimulator_android;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.TextPaint;
@@ -24,6 +25,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -54,9 +56,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        ProgressBar progressBar = findViewById(R.id.progressBar);
+        progressBar.setVisibility(View.INVISIBLE);
+        Handler handler = new Handler();
+
         TextView noAccountTextView = findViewById(R.id.noAccountTextView);
         String text = "No tienes una cuenta? Regístrate ahora!";
         SpannableString spannableString = new SpannableString(text);
+
 
         ClickableSpan clickableSpan = new ClickableSpan() {
             @Override
@@ -94,7 +101,10 @@ public class MainActivity extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                progressBar.setVisibility(View.VISIBLE);
+
                 try {
+
 
                     loginUser();
                     sharedPrefManager.saveUser(new User(usernameField.getText().toString(), passwordField.getText().toString()));
@@ -102,6 +112,7 @@ public class MainActivity extends AppCompatActivity {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+                progressBar.setVisibility(View.INVISIBLE);
                 //Intent intent = new Intent(MainActivity.this, WeaponsListActivity.class);
                 //startActivity(intent);
             }
@@ -137,6 +148,7 @@ public class MainActivity extends AppCompatActivity {
     private void doApiCall() {
         API apiService = API.retrofit.create(API.class);
         retrofit2.Call<List<User>> call = apiService.users();
+
 
         call.enqueue(new retrofit2.Callback<List<User>>() {
             @Override

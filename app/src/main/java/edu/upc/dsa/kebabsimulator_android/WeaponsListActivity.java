@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -45,6 +46,8 @@ public class WeaponsListActivity extends AppCompatActivity  {
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        ProgressBar progressBar = findViewById(R.id.progressBar2);
+        progressBar.setVisibility(View.INVISIBLE);
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_weapons_list);
@@ -69,12 +72,14 @@ public class WeaponsListActivity extends AppCompatActivity  {
         // Set the adapter
         adapter = new WeaponsListAdapter();
         recyclerView.setAdapter(adapter);
+        progressBar.setVisibility(View.VISIBLE);
         try {
             doApiCall();
         } catch (Exception e) {
             Log.w(TAG,"excp", e);
             throw new RuntimeException(e);
         }
+        progressBar.setVisibility(View.INVISIBLE);
 
         Button logoutButton = findViewById(R.id.logoutButton);
         logoutButton.setOnClickListener(new View.OnClickListener() {
