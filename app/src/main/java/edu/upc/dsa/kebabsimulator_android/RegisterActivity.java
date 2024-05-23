@@ -34,9 +34,11 @@ public class RegisterActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
+        setContentView(R.layout.activity_register);
         ProgressBar progressBar = findViewById(R.id.progressBar3);
         progressBar.setVisibility(View.INVISIBLE);
-        setContentView(R.layout.activity_register);
 
         nameEditText = findViewById(R.id.name);
         emailEditText = findViewById(R.id.email);
@@ -71,11 +73,12 @@ public class RegisterActivity extends AppCompatActivity {
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-                    progressBar.setVisibility(View.INVISIBLE);
+
                 } else {
                     // Las contraseñas no coinciden
                     Toast.makeText(RegisterActivity.this, "Las contraseñas no coinciden!", Toast.LENGTH_SHORT).show();
                 }
+                progressBar.setVisibility(View.INVISIBLE);
 
 
 

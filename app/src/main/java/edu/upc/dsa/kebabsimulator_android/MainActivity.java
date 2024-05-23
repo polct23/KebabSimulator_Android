@@ -58,7 +58,6 @@ public class MainActivity extends AppCompatActivity {
 
         ProgressBar progressBar = findViewById(R.id.progressBar);
         progressBar.setVisibility(View.INVISIBLE);
-        Handler handler = new Handler();
 
         TextView noAccountTextView = findViewById(R.id.noAccountTextView);
         String text = "No tienes una cuenta? Regístrate ahora!";
