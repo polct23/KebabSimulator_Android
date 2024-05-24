@@ -44,6 +44,10 @@ public class MainActivity extends AppCompatActivity {
 
      //SharedPreferences sharedPreferences;
 
+    public int tiempo= 300;
+    private Handler handler = new Handler();
+    private Runnable runnable;
+
 
     List<User> listaUsers = new ArrayList<User>();
 
@@ -108,18 +112,37 @@ public class MainActivity extends AppCompatActivity {
                     loginUser();
                     sharedPrefManager.saveUser(new User(usernameField.getText().toString(), passwordField.getText().toString()));
                     User loggedInUser = sharedPrefManager.getUser();
+
+                    // Crear un nuevo Handler y Runnable para desactivar el ProgressBar después de un retraso
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            progressBar.setVisibility(View.INVISIBLE);
+                        }
+                    }, tiempo);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                progressBar.setVisibility(View.INVISIBLE);
+
+
                 //Intent intent = new Intent(MainActivity.this, WeaponsListActivity.class);
                 //startActivity(intent);
             }
+
         });
 
 
 
 
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (handler != null && runnable != null) {
+            handler.removeCallbacks(runnable);
+        }
     }
 
     private void loginUser() throws Exception {
