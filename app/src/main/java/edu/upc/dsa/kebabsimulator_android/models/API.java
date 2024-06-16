@@ -6,24 +6,28 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
-import retrofit2.http.PUT;
 import retrofit2.http.POST;
-
-import android.util.Log;
 
 public interface API {
     // Ensure the base URL is correct and ends with a '/'
-    String BASE_URL = "http://147.83.7.203:80/dsaApp/";
 
-    @GET("weapons/getWeapons")  // Ensure there is no leading '/' if the base URL ends with one
-    Call<List<Weapon>> weapons();
+    //String BASE_URL = "http://147.83.7.203:80/dsaApp/";
+    String BASE_URL = "http://10.0.2.2:8080/dsaApp/";
 
-    @GET("users/getUsers")
-    Call<List<User>> users();
+    @GET("abilities/getAbilities")  // Ensure there is no leading '/' if the base URL ends with one
+    Call<List<Ability>> weapons();
 
-    @POST("users/newUser")
-    Call<User> addUser(@Body User user);
+    @GET("players")
+    Call<List<Player>> users();
 
+    @POST("players")
+    Call<Player> addUser(@Body Player player);
+
+    @GET("missions/getMissions")  // Ensure there is no leading '/' if the base URL ends with one
+    Call<List<Mission>> missions();
+
+    @GET("enemies/getEnemies")  // Ensure there is no leading '/' if the base URL ends with one
+    Call<List<Enemy>> enemies();
 
     // Static initialization block to ensure Retrofit is set up correctly
     Retrofit retrofit = new Retrofit.Builder()

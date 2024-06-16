@@ -1,29 +1,31 @@
 package edu.upc.dsa.kebabsimulator_android.models;
 
-public class User {
+public class Player {
 
     private String idUser;
     private String userName;
     private String password;
     private String email;
 
-    public User(String userName, String password) {
+    private double money;
+
+    public Player(String userName, String password) {
         this.userName = userName;
         this.password = password;
     }
-    public User(String idUser, String userName, String password, String email) {
+    public Player(String idUser, String userName, String password, String email) {
         this.idUser = idUser;
         this.userName = userName;
         this.password = password;
     }
-    public User(String userName, String password,String email) {
+    public Player(String userName, String password, String email) {
         //this.idUser = idUser;
         this.email = email;
         this.userName = userName;
         this.password = password;
     }
 
-    public User(){}
+    public Player(){}
 
     public String getUserName() {
         return userName;

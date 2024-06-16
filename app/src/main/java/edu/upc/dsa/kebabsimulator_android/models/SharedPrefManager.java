@@ -23,13 +23,13 @@ public class SharedPrefManager {
         return instance;
     }
 
-    public void saveUser(User user) {
+    public void saveUser(Player player) {
         SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
-        editor.putString("idUser", user.getIdUser());
-        editor.putString("userName", user.getUserName());
-        editor.putString("password", user.getPassword());
+        editor.putString("idUser", player.getIdUser());
+        editor.putString("userName", player.getUserName());
+        editor.putString("password", player.getPassword());
 
         editor.apply();
     }
@@ -39,9 +39,9 @@ public class SharedPrefManager {
         return sharedPreferences.getString("userName", null) != null;
     }
 
-    public User getUser() {
+    public Player getUser() {
         SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
-        return new User(
+        return new Player(
                 sharedPreferences.getString("idUser", null),
                 sharedPreferences.getString("userName", null),
                 sharedPreferences.getString("password", null)

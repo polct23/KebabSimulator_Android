@@ -13,30 +13,30 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
-import edu.upc.dsa.kebabsimulator_android.models.Weapon;
+import edu.upc.dsa.kebabsimulator_android.models.Ability;
 
 
-public class WeaponsListAdapter extends RecyclerView.Adapter<WeaponsListAdapter.ViewHolder> {
-    public List<Weapon> values;
+public class AbilityListAdapter extends RecyclerView.Adapter<AbilityListAdapter.ViewHolder> {
+    public List<Ability> values;
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
     // you provide access to all the views for a data item in a view holder
     public class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView txtWeaponName;
-        public TextView txtWeaponDescription;
-        public TextView txtWeaponDamage;
-        public TextView txtWeaponPrice;
+        public TextView txtabilityName;
+        public TextView txtabilityDescription;
+
+        public TextView txtabilityPrice;
         public View layout;
 
         public ViewHolder(View v) {
             super(v);
             layout = v;
-            txtWeaponName = v.findViewById(R.id.weaponName);
-            txtWeaponDescription = v.findViewById(R.id.weaponDescription);
-            txtWeaponDamage = v.findViewById(R.id.weaponDamage);
-            txtWeaponPrice = v.findViewById(R.id.weaponPrice);
-            txtWeaponName.setOnClickListener(new OnClickListener() {
+            txtabilityName = v.findViewById(R.id.weaponName);
+            txtabilityDescription = v.findViewById(R.id.weaponDescription);
+
+            txtabilityPrice = v.findViewById(R.id.weaponPrice);
+            txtabilityName.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     int position = getAdapterPosition();
@@ -49,13 +49,13 @@ public class WeaponsListAdapter extends RecyclerView.Adapter<WeaponsListAdapter.
     }
 
 
-    public void setData(List<Weapon> myDataset) {
+    public void setData(List<Ability> myDataset) {
         values = myDataset;
         notifyDataSetChanged();
         Log.d("API", "setData called:"+getItemCount());
     }
 
-    public void add(int position, Weapon item) {
+    public void add(int position, Ability item) {
         values.add(position, item);
         notifyItemInserted(position);
     }
@@ -65,12 +65,12 @@ public class WeaponsListAdapter extends RecyclerView.Adapter<WeaponsListAdapter.
         notifyItemRemoved(position);
     }
 
-    public WeaponsListAdapter() {
+    public AbilityListAdapter() {
         values = new ArrayList<>();
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public WeaponsListAdapter(List<Weapon> myDataset) {
+    public AbilityListAdapter(List<Ability> myDataset) {
         values = myDataset;
     }
 
@@ -93,18 +93,18 @@ public class WeaponsListAdapter extends RecyclerView.Adapter<WeaponsListAdapter.
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
-        Weapon w = values.get(position);
+        Ability w = values.get(position);
         final String name = w.getNombre();
-        holder.txtWeaponName.setText(name);
-        holder.txtWeaponDamage.setText("Daño: " + w.getDamage());
-        holder.txtWeaponPrice.setText("Precio: " + w.getPrice());
+        holder.txtabilityName.setText(name);
+
+        holder.txtabilityPrice.setText("Precio: " + w.getPrice());
         /*holder.txtWeaponName.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 remove(holder.getAdapterPosition());
             }
         });*/
-        holder.txtWeaponDescription.setText("Descripción: " + w.getDescripcion());
+        holder.txtabilityDescription.setText("Descripción: " + w.getDescripcion());
 
 
 

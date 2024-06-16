@@ -1,14 +1,13 @@
 package edu.upc.dsa.kebabsimulator_android;
 
 import android.annotation.SuppressLint;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -19,27 +18,23 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.IOException;
 import java.util.List;
 
 import edu.upc.dsa.kebabsimulator_android.models.API;
+import edu.upc.dsa.kebabsimulator_android.models.Mission;
 import edu.upc.dsa.kebabsimulator_android.models.SharedPrefManager;
-import edu.upc.dsa.kebabsimulator_android.models.Weapon;
+import edu.upc.dsa.kebabsimulator_android.models.Ability;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Call;
-import retrofit2.http.GET;
-import java.util.List;
 
-public class WeaponsListActivity extends AppCompatActivity  {
+public class AbilityListActivity extends AppCompatActivity  {
     private RecyclerView recyclerView;
-    private WeaponsListAdapter adapter;
+    private AbilityListAdapter adapter;
 
-    private final String TAG = WeaponsListActivity.class.getSimpleName();
+    private MissionListAdapter adapter2;
+
+    private final String TAG = AbilityListActivity.class.getSimpleName();
 
 
 
@@ -52,6 +47,12 @@ public class WeaponsListActivity extends AppCompatActivity  {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_weapons_list);
 
+
+        Intent intent = getIntent();
+        String username = intent.getStringExtra("username");
+        TextView usernameTextView = findViewById(R.id.playerNameTextView);
+        usernameTextView.setText(username);
+
         ProgressBar progressBar = findViewById(R.id.progressBar2);
         progressBar.setVisibility(View.INVISIBLE);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
@@ -61,7 +62,7 @@ public class WeaponsListActivity extends AppCompatActivity  {
         });
 
 
-        recyclerView = (RecyclerView) findViewById(R.id.myRecylcerView);
+        recyclerView = findViewById(R.id.myRecylcerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         // use this setting to
@@ -73,8 +74,12 @@ public class WeaponsListActivity extends AppCompatActivity  {
         // use a linear layout manager
 
         // Set the adapter
-        adapter = new WeaponsListAdapter();
+        adapter = new AbilityListAdapter();
         recyclerView.setAdapter(adapter);
+
+
+        //adapter2 = new MissionListAdapter();
+        //recyclerView.setAdapter(adapter2);
         //progressBar.setVisibility(View.VISIBLE);
         try {
             doApiCall();
@@ -91,7 +96,7 @@ public class WeaponsListActivity extends AppCompatActivity  {
             public void onClick(View v) {
                 SharedPrefManager sharedPrefManager = SharedPrefManager.getInstance(getApplicationContext());
                 sharedPrefManager.logout();
-                Intent intent = new Intent(WeaponsListActivity.this, MainActivity.class);
+                Intent intent = new Intent(AbilityListActivity.this, MainActivity.class);
                 startActivity(intent);
                 finish();
             }
@@ -99,32 +104,36 @@ public class WeaponsListActivity extends AppCompatActivity  {
 
     }
 
+    //Hcemos una llamada a la API para recibir la lista de habilidades del jugador
     private void doApiCall() {
         API apiService = API.retrofit.create(API.class);
-        Call<List<Weapon>> call = apiService.weapons();
+        Call<List<Ability>> call = apiService.weapons();
+        Toast.makeText(AbilityListActivity.this, "Loading data...", Toast.LENGTH_LONG).show();
 
-        call.enqueue(new Callback<List<Weapon>>() {
+        call.enqueue(new Callback<List<Ability>>() {
             @Override
-            public void onResponse(Call<List<Weapon>> call, Response<List<Weapon>> response) {
+            public void onResponse(Call<List<Ability>> call, Response<List<Ability>> response) {
                 int code = response.code();
-                List<Weapon> weaponList = response.body();
+                List<Ability> abilityList = response.body();
                 if (response.isSuccessful() && response.body() != null) {
                     adapter.setData(response.body());
                     adapter.notifyDataSetChanged();
+
+                    Toast.makeText(AbilityListActivity.this, "Data loaded :" + response.body().get(0).getAbilityName(), Toast.LENGTH_LONG).show();
                 } else {
                     Log.w(TAG, "Respuesta no exitosa o cuerpo nulo, HTTP " + response.code());
-                    Toast.makeText(WeaponsListActivity.this, "Failed to retrieve data. HTTP code: " + response.code(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(AbilityListActivity.this, "Failed to retrieve data. HTTP code: " + response.code(), Toast.LENGTH_LONG).show();
                 }
             }
 
             @Override
-            public void onFailure(Call<List<Weapon>> call, Throwable t) {
+            public void onFailure(Call<List<Ability>> call, Throwable t) {
                 Log.e(TAG, "Error in Retrofit: " + t.toString());
-                Toast.makeText(WeaponsListActivity.this, "Network error: " + t.getMessage(), Toast.LENGTH_LONG).show();
+                Toast.makeText(AbilityListActivity.this, "Network error: " + t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
     }
-
+    //Hcemos una llamada a la API para recibir la lista de misions del jugador
 
 
 

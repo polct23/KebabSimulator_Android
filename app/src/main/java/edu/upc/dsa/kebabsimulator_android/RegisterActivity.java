@@ -9,17 +9,13 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import edu.upc.dsa.kebabsimulator_android.models.API;
-import edu.upc.dsa.kebabsimulator_android.models.User;
+import edu.upc.dsa.kebabsimulator_android.models.Player;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -29,7 +25,7 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText confirmPasswordEditText;
     private Button registerButton;
 
-    List<User> listaUsers = new ArrayList<User>();
+    List<Player> listaPlayers = new ArrayList<Player>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,13 +83,13 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void addUser(String username, String password, String email) {
-        User newUser = new User(username, password, email);
+        Player newPlayer = new Player(username, password, email);
         API apiService = API.retrofit.create(API.class);
-        retrofit2.Call<User> call = apiService.addUser(newUser);
+        retrofit2.Call<Player> call = apiService.addUser(newPlayer);
 
-        call.enqueue(new retrofit2.Callback<User>() {
+        call.enqueue(new retrofit2.Callback<Player>() {
             @Override
-            public void onResponse(retrofit2.Call<User> call, retrofit2.Response<User> response) {
+            public void onResponse(retrofit2.Call<Player> call, retrofit2.Response<Player> response) {
                 if (response.isSuccessful()) {
                     Log.d("Success", "User added successfully");
                 } else {
@@ -102,7 +98,7 @@ public class RegisterActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(retrofit2.Call<User> call, Throwable t) {
+            public void onFailure(retrofit2.Call<Player> call, Throwable t) {
                 Log.e("FAIL(onFailure)", "Error in Retrofit: " + t.toString());
             }
         });
