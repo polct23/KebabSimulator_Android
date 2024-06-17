@@ -1,15 +1,15 @@
 package edu.upc.dsa.kebabsimulator_android.models;
 
 public class Mission {
-    private String idMission;
+    private int idMission;
     private int reward;
     private String description;
 
-    public String getIdMission() {
+    public int getIdMission() {
         return idMission;
     }
 
-    public void setIdMission(String idMission) {
+    public void setIdMission(int idMission) {
         this.idMission = idMission;
     }
 
@@ -33,8 +33,8 @@ public class Mission {
 
     }
 
-    public Mission(int reward, String description) {
-
+    public Mission(int idMission,int  reward, String description) {
+        this.idMission = idMission;
         this.reward = reward;
         this.description = description;
     }

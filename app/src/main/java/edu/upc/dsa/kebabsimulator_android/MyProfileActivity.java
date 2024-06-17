@@ -71,7 +71,7 @@ public class MyProfileActivity extends AppCompatActivity {
         listarMisionesBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MyProfileActivity.this, AbilityListActivity.class);
+                Intent intent = new Intent(MyProfileActivity.this, MissionListActivity.class);
                 intent.putExtra("username", userName);
                 startActivity(intent);
             }

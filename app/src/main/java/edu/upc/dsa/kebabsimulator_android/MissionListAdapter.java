@@ -11,12 +11,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
+import edu.upc.dsa.kebabsimulator_android.models.Enemy;
 import edu.upc.dsa.kebabsimulator_android.models.Mission;
 
 public class MissionListAdapter extends RecyclerView.Adapter<MissionListAdapter.ViewHolder> {
 
     private List<Mission> missionList = new ArrayList<>();
-
+    public MissionListAdapter(List<Mission> missionList) {
+        this.missionList = missionList;
+    }
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
