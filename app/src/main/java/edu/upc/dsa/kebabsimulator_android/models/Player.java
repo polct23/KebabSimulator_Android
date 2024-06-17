@@ -2,19 +2,49 @@ package edu.upc.dsa.kebabsimulator_android.models;
 
 public class Player {
 
-    private String idUser;
+    private String idPlayer;
     private String userName;
     private String password;
     private String email;
-
+    private int currentLevel;
+    private int currentMission;
     private double money;
+    public String toString() {
+        return "Player{" +
+                "idPlayer='" + idPlayer + '\'' +
+                ", userName='" + userName + '\'' +
+                ", password='" + password + '\'' +
+                '}';
+    }
+
+    public void setIdPlayer(String idPlayer) {
+        this.idPlayer = idPlayer;
+    }
+
+    public int getCurrentLevel() {
+        return currentLevel;
+    }
+
+    public void setCurrentLevel(int currentLevel) {
+        this.currentLevel = currentLevel;
+    }
+
+    public int getCurrentMission() {
+        return currentMission;
+    }
+
+    public void setCurrentMission(int currentMission) {
+        this.currentMission = currentMission;
+    }
+
+
 
     public Player(String userName, String password) {
         this.userName = userName;
         this.password = password;
     }
     public Player(String idUser, String userName, String password, String email) {
-        this.idUser = idUser;
+        this.idPlayer = idUser;
         this.userName = userName;
         this.password = password;
     }
@@ -25,7 +55,7 @@ public class Player {
         this.password = password;
     }
     public Player(String idUser, String userName, String password, String email, double money) {
-        this.idUser = idUser;
+        this.idPlayer = idUser;
         this.userName = userName;
         this.password = password;
         this.email = email;
@@ -57,11 +87,22 @@ public class Player {
     public void setPassword(String password) {
         this.password = password;
     }
-    public String getIdUser() {
-        return idUser;
+    public String getIdPlayer() {
+        return idPlayer;
     }
+
+    public Player(String idPlayer, String userName, String password, String email, int currentLevel, int currentMission, double money) {
+        this.idPlayer = idPlayer;
+        this.userName = userName;
+        this.password = password;
+        this.email = email;
+        this.currentLevel = currentLevel;
+        this.currentMission = currentMission;
+        this.money = money;
+    }
+
     public void setIDUser(String idUser) {
-        this.idUser = idUser;
+        this.idPlayer = idUser;
     }
     public String getEmail() {
         return email;

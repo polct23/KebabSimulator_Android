@@ -25,7 +25,7 @@ public class StoreActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private AbilityListAdapter adapter;
 
-    private final String TAG = AbilityListActivity.class.getSimpleName();
+    private final String TAG = StoreActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

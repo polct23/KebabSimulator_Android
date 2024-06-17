@@ -7,6 +7,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface API {
     // Ensure the base URL is correct and ends with a '/'
@@ -17,8 +19,14 @@ public interface API {
     @GET("abilities/getAbilities")  // Ensure there is no leading '/' if the base URL ends with one
     Call<List<Ability>> weapons();
 
+    @GET("players/abilities/{userName}")
+    Call<List<Ability>> getInventario(@Path("userName") String userName);
+
     @GET("players")
     Call<List<Player>> users();
+
+    @GET("players/{userName}")
+    Call<Player> getPlayerByName(@Path("userName") String userName);
 
     @POST("players")
     Call<Player> addUser(@Body Player player);

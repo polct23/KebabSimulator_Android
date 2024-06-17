@@ -87,9 +87,18 @@ public class MainActivity extends AppCompatActivity {
         if (sharedPrefManager.isLoggedIn()) {
             //Redirige al usuario a la actividad que desees
 
-            Intent intent = new Intent(MainActivity.this, MenuActivity.class);
-            intent.putExtra("username", sharedPrefManager.getUser().getUserName());
-            startActivity(intent);
+
+            Player player = sharedPrefManager.getUser();
+            String userName = player.getUserName();
+            Log.d("MainActivity", "UserName: " + userName);
+
+            if (userName != null) {
+                Intent intent = new Intent(MainActivity.this, MenuActivity.class);
+                intent.putExtra("username", userName);
+                startActivity(intent);
+            } else {
+                Log.e("MainActivity", "UserName is null");
+            }
            // finish();
         }
 

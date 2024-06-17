@@ -31,7 +31,7 @@ public class MenuActivity extends AppCompatActivity {
         profileButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MenuActivity.this, AbilityListActivity.class);
+                Intent intent = new Intent(MenuActivity.this, MyProfileActivity.class);
                 intent.putExtra("username", username);
                 startActivity(intent);
             }
