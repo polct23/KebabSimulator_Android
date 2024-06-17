@@ -24,6 +24,21 @@ public class Player {
         this.userName = userName;
         this.password = password;
     }
+    public Player(String idUser, String userName, String password, String email, double money) {
+        this.idUser = idUser;
+        this.userName = userName;
+        this.password = password;
+        this.email = email;
+        this.money = money;
+    }
+
+    public double getMoney() {
+        return money;
+    }
+
+    public void setMoney(double money) {
+        this.money = money;
+    }
 
     public Player(){}
 

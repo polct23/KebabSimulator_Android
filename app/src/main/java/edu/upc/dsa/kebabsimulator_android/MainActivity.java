@@ -86,9 +86,11 @@ public class MainActivity extends AppCompatActivity {
         sharedPrefManager = SharedPrefManager.getInstance(getApplicationContext());
         if (sharedPrefManager.isLoggedIn()) {
             //Redirige al usuario a la actividad que desees
-            Intent intent = new Intent(MainActivity.this, AbilityListActivity.class);
+
+            Intent intent = new Intent(MainActivity.this, MenuActivity.class);
+            intent.putExtra("username", sharedPrefManager.getUser().getUserName());
             startActivity(intent);
-            finish();
+           // finish();
         }
 
         loginButton.setOnClickListener(new View.OnClickListener() {
@@ -98,10 +100,11 @@ public class MainActivity extends AppCompatActivity {
 
                 try {
 
-
+                    //sharedPrefManager.saveUser(new Player(usernameField.getText().toString(), passwordField.getText().toString()));
+                    //Player loggedInPlayer = sharedPrefManager.getUser();
                     loginUser();
-                    sharedPrefManager.saveUser(new Player(usernameField.getText().toString(), passwordField.getText().toString()));
-                    Player loggedInPlayer = sharedPrefManager.getUser();
+
+
 
                     // Crear un nuevo Handler y Runnable para desactivar el ProgressBar después de un retraso
                     new Handler().postDelayed(new Runnable() {
@@ -195,6 +198,8 @@ public class MainActivity extends AppCompatActivity {
     private boolean checkUser(String username, String password) {
         for (Player player : listaPlayers) {
             if (player.getUserName().equals(username) && player.getPassword().equals(password)) {
+                sharedPrefManager.saveUser(new Player(usernameField.getText().toString(), passwordField.getText().toString()));
+
                 return true;
             }
         }

@@ -5,11 +5,16 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import edu.upc.dsa.kebabsimulator_android.models.Player;
+import edu.upc.dsa.kebabsimulator_android.models.SharedPrefManager;
+
 public class MenuActivity extends AppCompatActivity {
 
+    private SharedPrefManager sharedPrefManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -17,11 +22,12 @@ public class MenuActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         String username = intent.getStringExtra("username");
-
         TextView usernameTextView = findViewById(R.id.playerNameTextView);
+
         usernameTextView.setText(username);
 
         Button profileButton = findViewById(R.id.profileButton);
+
         profileButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
