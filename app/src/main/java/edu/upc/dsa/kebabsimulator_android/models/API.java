@@ -13,8 +13,8 @@ import retrofit2.http.Query;
 public interface API {
     // Ensure the base URL is correct and ends with a '/'
 
-    //String BASE_URL = "http://147.83.7.203:80/dsaApp/";
-    String BASE_URL = "http://10.0.2.2:8080/dsaApp/";
+    String BASE_URL = "http://147.83.7.203:80/dsaApp/";
+    //String BASE_URL = "http://10.0.2.2:8080/dsaApp/";
 
     @GET("abilities/getAbilities")  // Ensure there is no leading '/' if the base URL ends with one
     Call<List<Ability>> weapons();

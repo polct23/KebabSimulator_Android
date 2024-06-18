@@ -32,6 +32,15 @@ public class Mission {
     public Mission() {
 
     }
+    public Mission(int idMission, int reward) {
+        this.idMission = idMission;
+        this.reward = reward;
+    }
+
+    public Mission(int idMission, String description) {
+        this.idMission = idMission;
+        this.description = description;
+    }
 
     public Mission(int idMission,int  reward, String description) {
         this.idMission = idMission;

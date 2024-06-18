@@ -14,11 +14,9 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import java.util.List;
-
 import edu.upc.dsa.kebabsimulator_android.models.API;
-import edu.upc.dsa.kebabsimulator_android.models.Enemy;
 import edu.upc.dsa.kebabsimulator_android.models.Player;
+import edu.upc.dsa.kebabsimulator_android.models.SharedPrefManager;
 
 public class MyProfileActivity extends AppCompatActivity {
 
@@ -29,53 +27,64 @@ public class MyProfileActivity extends AppCompatActivity {
     private Button listarAbilitiesBtn;
     private TextView userNameText;
     private final String TAG = MyProfileActivity.class.getSimpleName();
+    private SharedPrefManager sharedPrefManager;
+
 
     private String userName;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_my_profile);
-        Intent intent = getIntent();
-        userName = intent.getStringExtra("username");
+            super.onCreate(savedInstanceState);
+            EdgeToEdge.enable(this);
+            setContentView(R.layout.activity_my_profile);
+            Intent intent = getIntent();
+            userName = intent.getStringExtra("username");
 
+        sharedPrefManager = SharedPrefManager.getInstance(getApplicationContext());
 
 
         emailAddress = findViewById(R.id.editTextTextEmailAddress);
-        currentLevel = findViewById(R.id.editTextNumberDecimal2);
-        money = findViewById(R.id.editTextNumberDecimal3);
-        listarMisionesBtn = findViewById(R.id.listarMisionesBtn);
-        listarAbilitiesBtn = findViewById(R.id.listarAbilitiesBtn);
-        userNameText = findViewById(R.id.playerNameTextView);
-        try {
-            doApiCall();
-        } catch (Exception e) {
-            Log.w(TAG,"excp", e);
-            throw new RuntimeException(e);
-        }
+            currentLevel = findViewById(R.id.editTextNumberDecimal2);
+            money = findViewById(R.id.editTextNumberDecimal3);
 
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
-        listarAbilitiesBtn.setOnClickListener(new View.OnClickListener() {
+            listarAbilitiesBtn = findViewById(R.id.listarAbilitiesBtn);
+            userNameText = findViewById(R.id.playerNameTextView);
+            try {
+                doApiCall();
+            } catch (Exception e) {
+                Log.w(TAG,"excp", e);
+                throw new RuntimeException(e);
+            }
+
+            ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+                Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+                v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+                return insets;
+            });
+            listarAbilitiesBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(MyProfileActivity.this, AbilityListActivity.class);
+                    intent.putExtra("username", userName);
+                    startActivity(intent);
+                }
+            });
+        Button inventoryButton = findViewById(R.id.inventoryButton);
+        inventoryButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MyProfileActivity.this, AbilityListActivity.class);
-                intent.putExtra("username", userName);
+                Intent intent = new Intent(MyProfileActivity.this, MissionActivity.class);
                 startActivity(intent);
             }
         });
-
-        listarMisionesBtn.setOnClickListener(new View.OnClickListener() {
+        Button logoutButton = findViewById(R.id.logoutButton);
+        logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MyProfileActivity.this, MissionListActivity.class);
-                intent.putExtra("username", userName);
-                startActivity(intent);
+                logoutUser();
             }
         });
+
+
     }
 
     private void doApiCall() {
@@ -100,5 +109,13 @@ public class MyProfileActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+
+    private void logoutUser() {
+        sharedPrefManager.logout();
+        Intent intent = new Intent(MyProfileActivity.this, MainActivity.class);
+        startActivity(intent);
+        finish();
     }
 }

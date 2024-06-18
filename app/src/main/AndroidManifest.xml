@@ -16,6 +16,9 @@
         android:theme="@style/Theme.KebabSimulator_Android"
         tools:targetApi="31">
         <activity
+            android:name=".MissionActivity"
+            android:exported="false" />
+        <activity
             android:name=".MissionListActivity"
             android:exported="false" />
         <activity

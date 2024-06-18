@@ -34,13 +34,13 @@ public class AbilityListActivity extends AppCompatActivity  {
     private RecyclerView recyclerView;
     private AbilityListAdapter adapter;
 
-    private MissionListAdapter adapter2;
-
     private final String TAG = AbilityListActivity.class.getSimpleName();
 
     private List<Player> playerList;
 
     private String username;
+
+    private List<Ability> abilityList2;
 
 
 
@@ -89,7 +89,7 @@ public class AbilityListActivity extends AppCompatActivity  {
         //progressBar.setVisibility(View.VISIBLE);
         try {
             doApiCall();
-            doApiCallPlayers();
+
         } catch (Exception e) {
             Log.w(TAG,"excp", e);
             throw new RuntimeException(e);
@@ -121,9 +121,10 @@ public class AbilityListActivity extends AppCompatActivity  {
             @Override
             public void onResponse(Call<List<Ability>> call, Response<List<Ability>> response) {
                 int code = response.code();
-                List<Ability> abilityList = response.body();
+
                 if (response.isSuccessful() && response.body() != null) {
-                    adapter.setData(response.body());
+                    abilityList2 = response.body();
+                    adapter.setData(abilityList2);
                     adapter.notifyDataSetChanged();
 
                     Toast.makeText(AbilityListActivity.this, "Data loaded :" + response.body().get(0).getAbilityName(), Toast.LENGTH_LONG).show();
@@ -140,63 +141,9 @@ public class AbilityListActivity extends AppCompatActivity  {
             }
         });
     }
-    //Hcemos una llamada a la API para recibir la lista de misions del jugador
-       private void doApiCall2() {
-            API apiService = API.retrofit.create(API.class);
-            Call<List<Mission>> call = apiService.missions();
-            Toast.makeText(AbilityListActivity.this, "Loading data...", Toast.LENGTH_LONG).show();
 
-            call.enqueue(new Callback<List<Mission>>() {
-                @Override
-                public void onResponse(Call<List<Mission>> call, Response<List<Mission>> response) {
-                    int code = response.code();
-                    List<Mission> missionList = response.body();
-                    if (response.isSuccessful() && response.body() != null) {
-                        adapter2.setData(response.body());
-                        adapter2.notifyDataSetChanged();
 
-                        Toast.makeText(AbilityListActivity.this, "Data loaded :" + response.body().get(0).getDescription(), Toast.LENGTH_LONG).show();
-                    } else {
-                        Log.w(TAG, "Respuesta no exitosa o cuerpo nulo, HTTP " + response.code());
-                        Toast.makeText(AbilityListActivity.this, "Failed to retrieve data. HTTP code: " + response.code(), Toast.LENGTH_LONG).show();
-                    }
-                }
 
-                @Override
-                public void onFailure(Call<List<Mission>> call, Throwable t) {
-                    Log.e(TAG, "Error in Retrofit: " + t.toString());
-                    Toast.makeText(AbilityListActivity.this, "Network error: " + t.getMessage(), Toast.LENGTH_LONG).show();
-                }
-            });
-        }
-
-        public void doApiCallPlayers() {
-            API apiService = API.retrofit.create(API.class);
-            Call<List<Player>> call = apiService.users();
-            Toast.makeText(AbilityListActivity.this, "Loading data...", Toast.LENGTH_LONG).show();
-
-            call.enqueue(new Callback<List<Player>>() {
-                @Override
-                public void onResponse(Call<List<Player>> call, Response<List<Player>> response) {
-                    int code = response.code();
-                     playerList = response.body();
-                    if (response.isSuccessful() && response.body() != null) {
-
-                        searchPlayer();
-
-                    } else {
-                        Log.w(TAG, "Respuesta no exitosa o cuerpo nulo, HTTP " + response.code());
-                        Toast.makeText(AbilityListActivity.this, "Failed to retrieve data. HTTP code: " + response.code(), Toast.LENGTH_LONG).show();
-                    }
-                }
-
-                @Override
-                public void onFailure(Call<List<Player>> call, Throwable t) {
-                    Log.e(TAG, "Error in Retrofit: " + t.toString());
-                    Toast.makeText(AbilityListActivity.this, "Network error: " + t.getMessage(), Toast.LENGTH_LONG).show();
-                }
-            });
-        }
 
         public void searchPlayer()
         {

@@ -6,7 +6,26 @@ public class Ability {
     private String description;
     private int value;
 
+    private String imageURL;
+
     private double price;
+
+    public String getImageURL() {
+        return imageURL;
+    }
+
+    public void setImageURL(String imageURL) {
+        this.imageURL = imageURL;
+    }
+    public Ability() {
+    }
+    public Ability(String nombre, String descripcion, int value, String imageURL, double price) {
+        this.abilityName = nombre;
+        this.description = descripcion;
+        this.value = value;
+        this.imageURL = imageURL;
+        this.price = price;
+    }
 
     public Ability(String nombre, String descripcion) {
         this.abilityName = nombre;
