@@ -15,13 +15,14 @@ import edu.upc.dsa.kebabsimulator_android.models.SharedPrefManager;
 public class MenuActivity extends AppCompatActivity {
 
     private SharedPrefManager sharedPrefManager;
+    private String username;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
 
         Intent intent = getIntent();
-        String username = intent.getStringExtra("username");
+        username = intent.getStringExtra("username");
         TextView usernameTextView = findViewById(R.id.playerNameTextView);
 
         usernameTextView.setText(username);
@@ -60,6 +61,7 @@ public class MenuActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MenuActivity.this, StoreActivity.class);
+                intent.putExtra("username", username);
                 startActivity(intent);
             }
         });

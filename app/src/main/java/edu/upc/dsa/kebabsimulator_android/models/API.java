@@ -31,6 +31,9 @@ public interface API {
     @POST("players")
     Call<Player> addUser(@Body Player player);
 
+    @POST("players/buyAbility/{idAbility}")
+    Call<Player> addAbility(@Path("idAbility") String idAbility, @Body Player player);
+
     @GET("missions/getMissions")  // Ensure there is no leading '/' if the base URL ends with one
     Call<List<Mission>> missions();
 

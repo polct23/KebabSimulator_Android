@@ -4,22 +4,31 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import edu.upc.dsa.kebabsimulator_android.models.API;
 import edu.upc.dsa.kebabsimulator_android.models.Ability;
+import edu.upc.dsa.kebabsimulator_android.models.Player;
 
 public class StoreAdapter extends RecyclerView.Adapter<StoreAdapter.ViewHolder>{
 
     public List<Ability> values;
-
+    private Player player;
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
     // you provide access to all the views for a data item in a view holder
+
+    public StoreAdapter(List<Ability> myDataset, Player player) {
+        values = myDataset;
+        this.player = player; // Almacena el jugador
+    }
     public class ViewHolder extends RecyclerView.ViewHolder {
         public TextView txtAbilityName;
         public TextView txtAbilityDescription;
@@ -80,7 +89,7 @@ public class StoreAdapter extends RecyclerView.Adapter<StoreAdapter.ViewHolder>{
         LayoutInflater inflater = LayoutInflater.from(
                 parent.getContext());
         View v =
-                inflater.inflate(R.layout.row_layout, parent, false);
+                inflater.inflate(R.layout.store_item, parent, false);
         // set the view's size, margins, paddings and layout parameters
         StoreAdapter.ViewHolder vh = new StoreAdapter.ViewHolder(v);
         return vh;
@@ -112,7 +121,19 @@ public class StoreAdapter extends RecyclerView.Adapter<StoreAdapter.ViewHolder>{
                 .into(holder.icon);
 
        */
+        Ability abilityToBuy = values.get(position);
+        Button buyButton = holder.layout.findViewById(R.id.buyButton);
+        buyButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+                String abilityId = abilityToBuy.getIdAbility();
+                comprarAbility(abilityId, player);
+
+
+
+            }
+        });
 
     }
 
@@ -121,4 +142,29 @@ public class StoreAdapter extends RecyclerView.Adapter<StoreAdapter.ViewHolder>{
     public int getItemCount() {
         return values.size();
     }
+    public void comprarAbility(String idAbility, Player player){
+
+
+        API apiService = API.retrofit.create(API.class);
+        retrofit2.Call<Player> call = apiService.addAbility(idAbility, player);
+
+        call.enqueue(new retrofit2.Callback<Player>() {
+            @Override
+            public void onResponse(retrofit2.Call<Player> call, retrofit2.Response<Player> response) {
+                if (response.isSuccessful()) {
+                    Log.d("Success", "User added successfully");
+
+                } else {
+                    Log.w("FAIL", "Failed to add user, HTTP " + response.code());
+                }
+            }
+
+            @Override
+            public void onFailure(retrofit2.Call<Player> call, Throwable t) {
+                Log.e("FAIL(onFailure)", "Error in Retrofit: " + t.toString());
+            }
+        });
+
+    }
+
 }

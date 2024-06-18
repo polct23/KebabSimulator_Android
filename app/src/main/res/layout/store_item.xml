@@ -13,42 +13,50 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/idMissionTextView"
+            android:id="@+id/weaponName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="ID de la misión"
-            android:textSize="16sp"
-            android:textColor="@android:color/black"
+            android:text="Nombre del arma"
+            android:textSize="18sp"
+            android:textColor="#000000"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/rewardTextView"
-            app:layout_constraintHorizontal_bias="0.0" />
-
-        <TextView
-            android:id="@+id/rewardTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="48dp"
-            android:text="Recompensa"
-            android:textColor="@android:color/holo_green_dark"
-            android:textSize="16sp"
-            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/descriptionTextView"
+            android:id="@+id/weaponDescription"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="Descripción de la misión"
+            android:text="Descripción del arma"
             android:textSize="16sp"
-            android:textColor="@android:color/black"
+            android:textColor="#666666"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/idMissionTextView"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0" />
+            app:layout_constraintTop_toBottomOf="@+id/weaponName" />
+
+        <TextView
+            android:id="@+id/weaponPrice"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Precio del arma"
+            android:textSize="16sp"
+            android:textColor="#000000"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/weaponDescription" />
+
+        <Button
+            android:id="@+id/buyButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="36dp"
+            android:text="Comprar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

@@ -47,7 +47,7 @@ public class MyProfileActivity extends AppCompatActivity {
             money = findViewById(R.id.editTextNumberDecimal3);
 
             listarAbilitiesBtn = findViewById(R.id.listarAbilitiesBtn);
-            userNameText = findViewById(R.id.playerNameTextView);
+            userNameText = findViewById(R.id.usernameTextView);
             try {
                 doApiCall();
             } catch (Exception e) {
@@ -73,6 +73,7 @@ public class MyProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MyProfileActivity.this, MissionActivity.class);
+                intent.putExtra("username", userName);
                 startActivity(intent);
             }
         });

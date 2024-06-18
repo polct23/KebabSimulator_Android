@@ -12,10 +12,12 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import edu.upc.dsa.kebabsimulator_android.models.API;
 import edu.upc.dsa.kebabsimulator_android.models.Ability;
+import edu.upc.dsa.kebabsimulator_android.models.Player;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -23,7 +25,11 @@ import retrofit2.Response;
 public class StoreActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
-    private AbilityListAdapter adapter;
+    private StoreAdapter adapter;
+
+    private String userName;
+
+    private Player currentplayer;
 
     private final String TAG = StoreActivity.class.getSimpleName();
 
@@ -39,13 +45,14 @@ public class StoreActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-
+        userName = getIntent().getStringExtra("username");
         recyclerView = (RecyclerView) findViewById(R.id.myRecylcerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         recyclerView.setHasFixedSize(true);
 
-        adapter = new AbilityListAdapter();
+        doApiCallUser();
+        adapter = new StoreAdapter(new ArrayList<Ability>(),currentplayer);
         recyclerView.setAdapter(adapter);
 
         try {
@@ -81,4 +88,26 @@ public class StoreActivity extends AppCompatActivity {
             }
         });
     }
+    private void doApiCallUser() {
+        API apiService = API.retrofit.create(API.class);
+        retrofit2.Call<Player> call = apiService.getPlayerByName(userName);
+
+
+        call.enqueue(new retrofit2.Callback<Player>() {
+            @Override
+            public void onResponse(retrofit2.Call<Player> call, retrofit2.Response<Player> response) {
+
+                currentplayer = response.body();
+
+            }
+
+            @Override
+            public void onFailure(retrofit2.Call<Player> call, Throwable t) {
+                Log.e("FAIL(onFailure)", "Error in Retrofit: " + t.toString());
+
+            }
+        });
+    }
+
+
 }

@@ -14,6 +14,7 @@ import java.util.List;
 import edu.upc.dsa.kebabsimulator_android.models.API;
 import edu.upc.dsa.kebabsimulator_android.models.Enemy;
 import edu.upc.dsa.kebabsimulator_android.models.Mission;
+import edu.upc.dsa.kebabsimulator_android.models.Player;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -21,10 +22,14 @@ public class MissionActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private MissionAdapter adapter;
 
+    private String userName;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mission);
+
+        userName = getIntent().getStringExtra("username");
 
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -52,6 +57,27 @@ public class MissionActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(retrofit2.Call<List<Mission>> call, Throwable t) {
+                Log.e("FAIL(onFailure)", "Error in Retrofit: " + t.toString());
+
+            }
+        });
+    }
+    private void doApiCallUser() {
+        API apiService = API.retrofit.create(API.class);
+        retrofit2.Call<Player> call = apiService.getPlayerByName(userName);
+
+
+        call.enqueue(new retrofit2.Callback<Player>() {
+            @Override
+            public void onResponse(retrofit2.Call<Player> call, retrofit2.Response<Player> response) {
+
+                Player currentplayer = response.body();
+
+
+            }
+
+            @Override
+            public void onFailure(retrofit2.Call<Player> call, Throwable t) {
                 Log.e("FAIL(onFailure)", "Error in Retrofit: " + t.toString());
 
             }
