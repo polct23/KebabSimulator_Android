@@ -29,7 +29,7 @@ public class StoreActivity extends AppCompatActivity {
 
     private String userName;
 
-    private Player currentplayer;
+    private Player currentplayer = new Player();
 
     private final String TAG = StoreActivity.class.getSimpleName();
 
@@ -39,20 +39,17 @@ public class StoreActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_store);
 
-
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
         userName = getIntent().getStringExtra("username");
+
+
+
         recyclerView = (RecyclerView) findViewById(R.id.myRecylcerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         recyclerView.setHasFixedSize(true);
 
-        doApiCallUser();
-        adapter = new StoreAdapter(new ArrayList<Ability>(),currentplayer);
+
+        adapter = new StoreAdapter(new ArrayList<Ability>(),userName);
         recyclerView.setAdapter(adapter);
 
         try {

@@ -97,17 +97,7 @@ public class AbilityListActivity extends AppCompatActivity  {
         progressBar.setVisibility(View.INVISIBLE);
        // progressBar.setVisibility(View.INVISIBLE);
 
-        Button logoutButton = findViewById(R.id.logoutButton);
-        logoutButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SharedPrefManager sharedPrefManager = SharedPrefManager.getInstance(getApplicationContext());
-                sharedPrefManager.logout();
-                Intent intent = new Intent(AbilityListActivity.this, MainActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
+
 
     }
 
@@ -145,15 +135,7 @@ public class AbilityListActivity extends AppCompatActivity  {
 
 
 
-        public void searchPlayer()
-        {
-            for (Player player : playerList) {
-                if (player.getUserName().equals(username)) {
-                    EditText moneyEditText = findViewById(R.id.moneyEditText);
-                    moneyEditText.setText(String.valueOf(player.getMoney()));
-                    }
-            }
-        }
+
 
 
 }

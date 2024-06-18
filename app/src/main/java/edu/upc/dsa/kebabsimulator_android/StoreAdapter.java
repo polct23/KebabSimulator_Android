@@ -16,18 +16,22 @@ import java.util.List;
 import edu.upc.dsa.kebabsimulator_android.models.API;
 import edu.upc.dsa.kebabsimulator_android.models.Ability;
 import edu.upc.dsa.kebabsimulator_android.models.Player;
+import retrofit2.Call;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class StoreAdapter extends RecyclerView.Adapter<StoreAdapter.ViewHolder>{
 
     public List<Ability> values;
-    private Player player;
+    private Player player = new Player();
+
+    private String userName = "";
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
     // you provide access to all the views for a data item in a view holder
 
-    public StoreAdapter(List<Ability> myDataset, Player player) {
+    public StoreAdapter(List<Ability> myDataset, String userName) {
         values = myDataset;
-        this.player = player; // Almacena el jugador
+        this.userName = userName; // Almacena el jugador
     }
     public class ViewHolder extends RecyclerView.ViewHolder {
         public TextView txtAbilityName;
@@ -121,6 +125,7 @@ public class StoreAdapter extends RecyclerView.Adapter<StoreAdapter.ViewHolder>{
                 .into(holder.icon);
 
        */
+        doApiCallUser();
         Ability abilityToBuy = values.get(position);
         Button buyButton = holder.layout.findViewById(R.id.buyButton);
         buyButton.setOnClickListener(new View.OnClickListener() {
@@ -128,12 +133,28 @@ public class StoreAdapter extends RecyclerView.Adapter<StoreAdapter.ViewHolder>{
             public void onClick(View v) {
 
                 String abilityId = abilityToBuy.getIdAbility();
-                comprarAbility(abilityId, player);
+                if (player.getMoney() < abilityToBuy.getPrice()){
+                    Toast.makeText(v.getContext(), "No tienes suficiente dinero", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                else
+                {
+                    player.setMoney(player.getMoney() - abilityToBuy.getPrice());
+                    Toast.makeText(v.getContext(), "Has comprado la habilidad", Toast.LENGTH_SHORT).show();
+                    comprarAbility(abilityId, player);
+
+
+                }
+
+
+
+
 
 
 
             }
         });
+
 
     }
 
@@ -165,6 +186,27 @@ public class StoreAdapter extends RecyclerView.Adapter<StoreAdapter.ViewHolder>{
             }
         });
 
+    }
+    private void doApiCallUser() {
+        API apiService = API.retrofit.create(API.class);
+        retrofit2.Call<Player> call = apiService.getPlayerByName(userName);
+
+
+        call.enqueue(new retrofit2.Callback<Player>() {
+            @Override
+            public void onResponse(retrofit2.Call<Player> call, retrofit2.Response<Player> response) {
+
+
+                player = response.body();
+
+            }
+
+            @Override
+            public void onFailure(retrofit2.Call<Player> call, Throwable t) {
+                Log.e("FAIL(onFailure)", "Error in Retrofit: " + t.toString());
+
+            }
+        });
     }
 
 }

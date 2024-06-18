@@ -6,7 +6,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+
+import android.widget.ImageView;
+
 
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -25,7 +30,7 @@ public class AbilityListAdapter extends RecyclerView.Adapter<AbilityListAdapter.
     public class ViewHolder extends RecyclerView.ViewHolder {
         public TextView txtabilityName;
         public TextView txtabilityDescription;
-
+        public ImageView weaponImage;
         public TextView txtabilityPrice;
         public View layout;
 
@@ -36,6 +41,7 @@ public class AbilityListAdapter extends RecyclerView.Adapter<AbilityListAdapter.
             txtabilityDescription = v.findViewById(R.id.weaponDescription);
 
             txtabilityPrice = v.findViewById(R.id.weaponPrice);
+            weaponImage = v.findViewById(R.id.weaponImage);
             txtabilityName.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -105,7 +111,6 @@ public class AbilityListAdapter extends RecyclerView.Adapter<AbilityListAdapter.
             }
         });*/
         holder.txtabilityDescription.setText("Descripción: " + w.getDescripcion());
-
 
 
 

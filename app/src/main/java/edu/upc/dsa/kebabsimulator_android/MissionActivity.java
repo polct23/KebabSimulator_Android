@@ -3,6 +3,8 @@ package edu.upc.dsa.kebabsimulator_android;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
+import android.view.View;
+import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -24,6 +26,11 @@ public class MissionActivity extends AppCompatActivity {
 
     private String userName;
 
+    private Player currentPlayer = new Player();
+
+    private List<Mission> missionscompleted;
+    private List<Mission> missions;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +44,17 @@ public class MissionActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
 
         doApiCall();
+        doApiCallUser();
+
+        Button completedMissionsButton = findViewById(R.id.completedMissionsButton);
+        completedMissionsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                completedMission();
+            }
+        });
     }
     private void doApiCall() {
         API apiService = API.retrofit.create(API.class);
@@ -51,7 +69,7 @@ public class MissionActivity extends AppCompatActivity {
                     Log.i("onResponse", "OK");
                     Toast.makeText(MissionActivity.this, "Missions loaded", Toast.LENGTH_SHORT).show();
                 }
-                List<Mission> missions = response.body();
+                missions = response.body();
                 adapter.setData(missions);
             }
 
@@ -71,8 +89,7 @@ public class MissionActivity extends AppCompatActivity {
             @Override
             public void onResponse(retrofit2.Call<Player> call, retrofit2.Response<Player> response) {
 
-                Player currentplayer = response.body();
-
+              currentPlayer = response.body();
 
             }
 
@@ -82,5 +99,21 @@ public class MissionActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    public void completedMission() {
+
+        for (Mission m : missions) {
+            if (m.getIdMission() < currentPlayer.getCurrentMission()) {
+                missionscompleted.add(m);
+            }
+        }
+        if (missionscompleted.isEmpty()) {
+            Toast.makeText(MissionActivity.this, "No completed missions", Toast.LENGTH_SHORT).show();
+        }
+        else
+        {
+            adapter.setData(missionscompleted);
+        }
     }
 }
