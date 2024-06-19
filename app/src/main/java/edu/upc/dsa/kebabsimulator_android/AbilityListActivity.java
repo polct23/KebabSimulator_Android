@@ -113,10 +113,16 @@ public class AbilityListActivity extends AppCompatActivity  {
 
                 if (response.isSuccessful() && response.body() != null) {
                     abilityList2 = response.body();
-                    adapter.setData(abilityList2);
-                    adapter.notifyDataSetChanged();
+                    if(abilityList2.size() == 0){
+                        Toast.makeText(AbilityListActivity.this, username + " no tienes habilidades", Toast.LENGTH_LONG).show();
+                    }
+                    else{
+                        adapter.setData(abilityList2);
+                        adapter.notifyDataSetChanged();
+                    }
 
-                    Toast.makeText(AbilityListActivity.this, "Data loaded :" + response.body().get(0).getAbilityName(), Toast.LENGTH_LONG).show();
+
+
                 } else {
                     Log.w(TAG, "Respuesta no exitosa o cuerpo nulo, HTTP " + response.code());
                     Toast.makeText(AbilityListActivity.this, "Failed to retrieve data. HTTP code: " + response.code(), Toast.LENGTH_LONG).show();

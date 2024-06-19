@@ -42,12 +42,14 @@ public class MyProfileActivity extends AppCompatActivity {
         sharedPrefManager = SharedPrefManager.getInstance(getApplicationContext());
 
 
+
         emailAddress = findViewById(R.id.editTextTextEmailAddress);
             currentLevel = findViewById(R.id.editTextNumberDecimal2);
             money = findViewById(R.id.editTextNumberDecimal3);
 
             listarAbilitiesBtn = findViewById(R.id.listarAbilitiesBtn);
             userNameText = findViewById(R.id.usernameTextView);
+
             try {
                 doApiCall();
             } catch (Exception e) {
@@ -98,10 +100,12 @@ public class MyProfileActivity extends AppCompatActivity {
             public void onResponse(retrofit2.Call<Player> call, retrofit2.Response<Player> response) {
 
                 Player player = response.body();
+
+
                 try{userNameText.setText(player.getUserName());
-                emailAddress.setText(player.getEmail());
-                currentLevel.setText(String.valueOf(player.getCurrentLevel()));
-                money.setText(String.valueOf(player.getMoney()));}
+                    emailAddress.setText(player.getEmail());
+                    currentLevel.setText(String.valueOf(player.getCurrentLevel()));
+                    money.setText(String.valueOf(player.getMoney()));}
                 catch(Exception e){
                     Log.e("FAIL(SharedPreference)", "El usuario es null");
                 }

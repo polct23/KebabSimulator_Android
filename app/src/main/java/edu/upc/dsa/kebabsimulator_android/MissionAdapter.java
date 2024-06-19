@@ -30,9 +30,9 @@ public class MissionAdapter extends RecyclerView.Adapter<MissionAdapter.MissionV
     @Override
     public void onBindViewHolder(MissionViewHolder holder, int position) {
         Mission mission = missions.get(position);
-        holder.idMissionTextView.setText(String.valueOf(mission.getIdMission()));
-        holder.rewardTextView.setText(String.valueOf(mission.getReward()));
-        holder.descriptionTextView.setText(mission.getDescription());
+        holder.idMissionTextView.setText("ID: " + String.valueOf(mission.getIdMission()));
+        holder.rewardTextView.setText("Recompensa: " + String.valueOf(mission.getReward()));
+        holder.descriptionTextView.setText("Descripción: "+mission.getDescription());
     }
 
     @Override
