@@ -108,6 +108,7 @@ public class MissionActivity extends AppCompatActivity {
                 missionscompleted.add(m);
             }
         }
+        Toast.makeText(MissionActivity.this, "Completed missions;" + missionscompleted.size(), Toast.LENGTH_SHORT).show();
         if (missionscompleted.isEmpty()) {
             Toast.makeText(MissionActivity.this, "No completed missions", Toast.LENGTH_SHORT).show();
         }

@@ -105,7 +105,6 @@ public class AbilityListActivity extends AppCompatActivity  {
     private void doApiCall() {
         API apiService = API.retrofit.create(API.class);
         Call<List<Ability>> call = apiService.getInventario(username);
-        Toast.makeText(AbilityListActivity.this, "Loading data...", Toast.LENGTH_LONG).show();
 
         call.enqueue(new Callback<List<Ability>>() {
             @Override

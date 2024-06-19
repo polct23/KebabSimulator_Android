@@ -182,7 +182,7 @@ public class MainActivity extends AppCompatActivity {
         call.enqueue(new retrofit2.Callback<List<Player>>() {
             @Override
             public void onResponse(retrofit2.Call<List<Player>> call, retrofit2.Response<List<Player>> response) {
-                Toast.makeText(MainActivity.this, "Respuesta recibida", Toast.LENGTH_SHORT).show();
+
                  listaPlayers = response.body();
 
 

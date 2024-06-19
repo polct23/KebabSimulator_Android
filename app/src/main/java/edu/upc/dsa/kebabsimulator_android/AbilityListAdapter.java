@@ -15,6 +15,8 @@ import android.widget.ImageView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,7 +32,7 @@ public class AbilityListAdapter extends RecyclerView.Adapter<AbilityListAdapter.
     public class ViewHolder extends RecyclerView.ViewHolder {
         public TextView txtabilityName;
         public TextView txtabilityDescription;
-        public ImageView weaponImage;
+        public ImageView abilityImage;
         public TextView txtabilityPrice;
         public View layout;
 
@@ -41,7 +43,7 @@ public class AbilityListAdapter extends RecyclerView.Adapter<AbilityListAdapter.
             txtabilityDescription = v.findViewById(R.id.weaponDescription);
 
             txtabilityPrice = v.findViewById(R.id.weaponPrice);
-            weaponImage = v.findViewById(R.id.weaponImage);
+            abilityImage = v.findViewById(R.id.abilityImageView);
             txtabilityName.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -111,6 +113,7 @@ public class AbilityListAdapter extends RecyclerView.Adapter<AbilityListAdapter.
             }
         });*/
         holder.txtabilityDescription.setText("Descripción: " + w.getDescripcion());
+        Picasso.get().load(w.getImageURL()).into(holder.abilityImage);
 
 
 
