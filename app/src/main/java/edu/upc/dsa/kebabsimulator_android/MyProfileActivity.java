@@ -98,10 +98,13 @@ public class MyProfileActivity extends AppCompatActivity {
             public void onResponse(retrofit2.Call<Player> call, retrofit2.Response<Player> response) {
 
                 Player player = response.body();
-                userNameText.setText(player.getUserName());
+                try{userNameText.setText(player.getUserName());
                 emailAddress.setText(player.getEmail());
                 currentLevel.setText(String.valueOf(player.getCurrentLevel()));
-                money.setText(String.valueOf(player.getMoney()));
+                money.setText(String.valueOf(player.getMoney()));}
+                catch(Exception e){
+                    Log.e("FAIL(SharedPreference)", "El usuario es null");
+                }
             }
 
             @Override

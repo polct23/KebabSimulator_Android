@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import edu.upc.dsa.kebabsimulator_android.models.API;
@@ -28,7 +29,7 @@ public class MissionActivity extends AppCompatActivity {
 
     private Player currentPlayer = new Player();
 
-    private List<Mission> missionscompleted;
+    private List<Mission> missionscompleted = new LinkedList<>();
     private List<Mission> missions;
 
     @Override

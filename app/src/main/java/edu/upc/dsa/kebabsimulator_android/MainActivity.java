@@ -83,6 +83,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+
         sharedPrefManager = SharedPrefManager.getInstance(getApplicationContext());
         if (sharedPrefManager.isLoggedIn()) {
             //Redirige al usuario a la actividad que desees
