@@ -28,7 +28,7 @@ public class MissionActivity extends AppCompatActivity {
 
     private Player currentPlayer = new Player();
 
-    private List<Mission> missionscompleted;
+    private List<Mission> missionscompleted = new ArrayList<Mission>();
     private List<Mission> missions;
 
     @Override
@@ -108,7 +108,7 @@ public class MissionActivity extends AppCompatActivity {
                 missionscompleted.add(m);
             }
         }
-        Toast.makeText(MissionActivity.this, "Completed missions;" + missionscompleted.size(), Toast.LENGTH_SHORT).show();
+
         if (missionscompleted.isEmpty()) {
             Toast.makeText(MissionActivity.this, "No completed missions", Toast.LENGTH_SHORT).show();
         }

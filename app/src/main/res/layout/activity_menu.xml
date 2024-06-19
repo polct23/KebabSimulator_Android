@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
@@ -14,21 +12,9 @@
         android:id="@+id/avatarImageView"
         android:layout_width="46dp"
         android:layout_height="45dp"
-
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="64dp"
         android:src="@drawable/kebab2"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/mainMenuTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="136dp"
-        android:layout_marginTop="76dp"
-        android:text="Menu Principal"
-        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -36,13 +22,23 @@
         android:id="@+id/playerNameTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
         android:text="Nombre del jugador"
         app:layout_constraintBottom_toBottomOf="@+id/avatarImageView"
         app:layout_constraintStart_toEndOf="@+id/avatarImageView"
         app:layout_constraintTop_toTopOf="@+id/avatarImageView"
-        app:layout_constraintVertical_bias="0.576" />
+        app:layout_constraintVertical_bias="0.615" />
 
-
+    <TextView
+        android:id="@+id/mainMenuTextView"
+        android:layout_width="170dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="112dp"
+        android:layout_marginTop="208dp"
+        android:text="Menu Principal"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/startGameButton"
@@ -55,96 +51,77 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-
-
+    <!-- Profile Button in a CardView -->
     <TextView
         android:id="@+id/textView"
         android:layout_width="204dp"
         android:layout_height="30dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="172dp"
         android:text="Kebab Simulator"
         android:textAlignment="center"
         android:textAllCaps="false"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         android:textSize="15sp"
         android:textStyle="bold"
-
         android:typeface="monospace"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- Profile Button in a CardView -->
-    <!-- Profile Button in a CardView -->
-    <androidx.cardview.widget.CardView
-        android:id="@+id/profileCardView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        app:cardCornerRadius="8dp"
-        app:cardElevation="4dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/shopCardView">
 
-        <Button
-            android:id="@+id/profileButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/square_button_background"
-            android:text="Mi perfil"
-            android:textColor="@android:color/white" />
-    </androidx.cardview.widget.CardView>
+    <Button
+        android:id="@+id/shopButton"
+        android:layout_width="208dp"
+        android:layout_height="62dp"
+        android:layout_marginStart="112dp"
+        android:layout_marginBottom="244dp"
+        android:background="@drawable/square_button_background"
+        android:drawableStart="@drawable/shop"
+        android:drawablePadding="10dp"
+        android:minWidth="48dp"
+        android:minHeight="48dp"
+        android:padding="8dp"
+        android:text="Tienda"
+        android:textColor="@android:color/white"
+        app:icon="@drawable/shop"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
-    <!-- Shop Button in a CardView -->
-    <androidx.cardview.widget.CardView
-        android:id="@+id/shopCardView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        app:cardCornerRadius="8dp"
-        app:cardElevation="4dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profileCardView"
-        app:layout_constraintBottom_toTopOf="@+id/enemiesCardView">
+    <Button
+        android:id="@+id/profileButton"
+        android:layout_width="194dp"
+        android:layout_height="58dp"
+        android:layout_marginStart="108dp"
+        android:layout_marginBottom="392dp"
+        android:background="@drawable/square_button_background"
+        android:drawableStart="@drawable/myprofile"
+        android:drawablePadding="10dp"
+        android:minWidth="48dp"
+        android:minHeight="48dp"
+        android:padding="8dp"
+        android:text="Mi perfil"
+        android:textColor="@android:color/white"
+        app:icon="@drawable/myprofile"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
-        <Button
-            android:id="@+id/shopButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/square_button_background"
-            android:text="Tienda"
-            android:textColor="@android:color/white" />
-    </androidx.cardview.widget.CardView>
-
-    <!-- Enemies Button in a CardView -->
-    <androidx.cardview.widget.CardView
-        android:id="@+id/enemiesCardView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        app:cardCornerRadius="8dp"
-        app:cardElevation="4dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/shopCardView"
-        app:layout_constraintBottom_toBottomOf="parent">
-
-        <Button
-            android:id="@+id/enemiesButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/square_button_background"
-            android:text="Enemigos"
-            android:textColor="@android:color/white" />
-    </androidx.cardview.widget.CardView>
+    <Button
+        android:id="@+id/enemiesButton"
+        android:layout_width="199dp"
+        android:layout_height="54dp"
+        android:layout_marginStart="112dp"
+        android:layout_marginBottom="316dp"
+        android:background="@drawable/square_button_background"
+        android:drawableStart="@drawable/enemy"
+        android:drawablePadding="10dp"
+        android:minWidth="48dp"
+        android:minHeight="48dp"
+        android:padding="8dp"
+        android:text="Enemigos"
+        android:textColor="@android:color/white"
+        app:icon="@drawable/enemy"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

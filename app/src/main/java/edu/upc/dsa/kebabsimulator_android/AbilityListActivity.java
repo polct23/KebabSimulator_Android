@@ -116,7 +116,7 @@ public class AbilityListActivity extends AppCompatActivity  {
                     adapter.setData(abilityList2);
                     adapter.notifyDataSetChanged();
 
-                    Toast.makeText(AbilityListActivity.this, "Data loaded :" + response.body().get(0).getAbilityName(), Toast.LENGTH_LONG).show();
+
                 } else {
                     Log.w(TAG, "Respuesta no exitosa o cuerpo nulo, HTTP " + response.code());
                     Toast.makeText(AbilityListActivity.this, "Failed to retrieve data. HTTP code: " + response.code(), Toast.LENGTH_LONG).show();

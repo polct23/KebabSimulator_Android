@@ -35,7 +35,23 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="#f8d7da"
             android:padding="16dp">
+
+            <TextView
+                android:id="@+id/meatTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="36dp"
+                android:padding="8dp"
+                android:text="Enemy Meat"
+                android:textColor="#000000"
+                android:textSize="16sp"
+
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/speedTextView" />
 
             <TextView
                 android:id="@+id/nameTextView"
@@ -57,7 +73,7 @@
                 android:layout_height="wrap_content"
                 android:padding="8dp"
                 android:text="Enemy Speed"
-                android:textColor="@android:color/darker_gray"
+                android:textColor="#000000"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -65,12 +81,12 @@
                 app:layout_constraintTop_toBottomOf="@+id/nameTextView" />
 
             <TextView
-                android:id="@+id/meatTextView"
+                android:id="@+id/descriptionTextView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:padding="8dp"
-                android:text="Enemy Meat"
-                android:textColor="@android:color/darker_gray"
+                android:text="Enemy Description"
+                android:textColor="#000000"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

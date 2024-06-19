@@ -37,6 +37,7 @@ public class EnemyListAdapter extends RecyclerView.Adapter<EnemyListAdapter.Enem
         holder.nameTextView.setText(currentEnemy.getName());
         holder.speedTextView.setText("Speed: " + currentEnemy.getSpeed());
         holder.meatTextView.setText("Meat: " + currentEnemy.getMeat());
+        holder.descritpionTextView.setText("Description: " + currentEnemy.getDescription());
         // Aquí puedes establecer más propiedades del enemigo en las vistas del ViewHolder
     }
 
@@ -55,11 +56,14 @@ public class EnemyListAdapter extends RecyclerView.Adapter<EnemyListAdapter.Enem
         TextView speedTextView;
         TextView meatTextView;
 
+        TextView descritpionTextView;
+
         public EnemyViewHolder(@NonNull View itemView) {
             super(itemView);
             nameTextView = itemView.findViewById(R.id.nameTextView);
             speedTextView = itemView.findViewById(R.id.speedTextView);
             meatTextView = itemView.findViewById(R.id.meatTextView);
+            descritpionTextView = itemView.findViewById(R.id.descriptionTextView);
 
             // Aquí puedes obtener referencias a más vistas en el item de enemigo
         }
