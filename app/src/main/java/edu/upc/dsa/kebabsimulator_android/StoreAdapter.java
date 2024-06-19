@@ -142,6 +142,7 @@ public class StoreAdapter extends RecyclerView.Adapter<StoreAdapter.ViewHolder>{
                     player.setMoney(player.getMoney() - abilityToBuy.getPrice());
                     Toast.makeText(v.getContext(), "Has comprado la habilidad", Toast.LENGTH_SHORT).show();
                     comprarAbility(abilityId, player);
+                    buyButton.setEnabled(false);
                 }
 
             }

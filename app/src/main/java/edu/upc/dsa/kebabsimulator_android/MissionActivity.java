@@ -58,6 +58,7 @@ public class MissionActivity extends AppCompatActivity {
 
 
                 completedMission();
+                completedMissionsButton.setVisibility(View.GONE);
             }
         });
     }
