@@ -116,14 +116,6 @@ public class AbilityListAdapter extends RecyclerView.Adapter<AbilityListAdapter.
         Picasso.get().load(w.getImageURL()).into(holder.abilityImage);
 
 
-
-      /*  GlideApp.with(holder.icon.getContext())
-                .load(c.avatar_url)
-                .into(holder.icon);
-
-       */
-
-
     }
 
     // Return the size of your dataset (invoked by the layout manager)

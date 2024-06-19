@@ -18,16 +18,11 @@
         <activity
             android:name=".MissionActivity"
             android:exported="false" />
-        <activity
-            android:name=".MissionListActivity"
-            android:exported="false" />
+
         <activity
             android:name=".MyProfileActivity"
             android:exported="false" />
-        <activity
-            android:name=".MainActivity2"
-            android:exported="false"
-            android:theme="@style/Theme.KebabSimulator_Android" />
+
         <activity
             android:name=".StoreActivity"
             android:exported="false" />
